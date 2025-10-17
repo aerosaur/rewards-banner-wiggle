@@ -1,90 +1,160 @@
-/* Container with padding */
-.page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Subtle jiggle animation */
-.rewards-email-sub-banner__image.jiggle {
-    animation: subtleJiggle 0.5s ease-in-out;
-}
-
-@keyframes subtleJiggle {
+/* Jiggle Animation */
+@keyframes jiggle {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(-5deg);
     }
     15% {
-        transform: rotate(-4deg);
+        transform: rotate(-9deg);
     }
     30% {
-        transform: rotate(4deg);
-    }
-    45% {
-        transform: rotate(-3deg);
-    }
-    60% {
-        transform: rotate(3deg);
-    }
-    75% {
         transform: rotate(-1deg);
     }
+    45% {
+        transform: rotate(-8deg);
+    }
+    60% {
+        transform: rotate(-2deg);
+    }
+    75% {
+        transform: rotate(-6deg);
+    }
     90% {
-        transform: rotate(1deg);
+        transform: rotate(-4deg);
     }
     100% {
-        transform: rotate(0deg);
+        transform: rotate(-5deg);
     }
 }
 
-/* Button hover chevron animation */
-.rewards-email-sub-banner__cta-button {
+/* Apply jiggle animation when class is added */
+.rewards-email-sub-banner__image.jiggle {
+    animation: jiggle 500ms ease-in-out;
+}
+
+/* Pulse the pink circle during wiggle */
+.rewards-email-sub-banner__icon:has(.jiggle)::before {
+    animation: circlePulse 500ms ease-in-out;
+}
+
+/* Circle pulse animation */
+@keyframes circlePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+    25% {
+        transform: scale(1.08);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+    }
+    50% {
+        transform: scale(1.12);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+    }
+    75% {
+        transform: scale(1.08);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .rewards-email-sub-banner__image.jiggle {
+        animation: none;
+    }
+    .rewards-email-sub-banner__icon:has(.jiggle)::before {
+        animation: none;
+    }
+}
+
+/* Add horizontal margin to entire banner */
+.rewards-email-sub-banner {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* Rewards Card Styling */
+.rewards-email-sub-banner__icon {
     position: relative;
-    overflow: visible;
-    transition: padding-right 320ms cubic-bezier(.2,.9,.1,1);
-    padding-right: 20px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 105px;
 }
 
-.rewards-email-sub-banner__cta-button:hover,
-.rewards-email-sub-banner__cta-button.proximal {
-    padding-right: 44px !important;
-}
-
-/* Gift icon - rewards indicator (initially hidden and shifted right) */
-.rewards-email-sub-banner__cta-button::after {
+/* Pink circle background behind the card */
+.rewards-email-sub-banner__icon::before {
     content: '';
     position: absolute;
-    right: 14px;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='white'%3E%3Cpath d='M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08a13.69,13.69,0,0,1-4.5,10c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51Zm-64.09.36A16.63,16.63,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92-9.72-1-25.44-4-34.92-12.39a13.69,13.69,0,0,1-4.5-10A16.6,16.6,0,0,1,84.87,36.87ZM40,88h80v32H40Zm16,48h64v64H56Zm144,64H136V136h64Zm16-80H136V88h80v32Z'%3E%3C/path%3E%3C/svg%3E");
+    width: 95px;
+    height: 95px;
+    background-color: #FF5B77; /* Finder pink */
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Card image with rotation */
+.rewards-email-sub-banner__image {
+    background-image: url('../images/CardSVG.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transform: translateY(-50%) translateX(6px) scale(.9);
-    opacity: 0;
-    transition: transform 200ms cubic-bezier(.215,.61,.355,1), opacity 200ms cubic-bezier(.215,.61,.355,1);
-    pointer-events: none;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+    width: 130px;
+    height: 82px;
+    transform: rotate(-5deg); /* Counter-clockwise rotation */
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-.rewards-email-sub-banner__cta-button:hover::after,
-.rewards-email-sub-banner__cta-button.proximal::after {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) scale(1);
+/* Ensure proper stacking context */
+.rewards-email-sub-banner__container {
+    position: relative;
 }
 
-/* Responsive padding */
+/* Media queries for responsive sizing */
 @media (max-width: 768px) {
-    .page-container {
-        padding: 0 16px;
+    .rewards-email-sub-banner {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .rewards-email-sub-banner__icon {
+        width: 120px;
+        height: 90px;
+    }
+
+    .rewards-email-sub-banner__icon::before {
+        width: 82px;
+        height: 82px;
+    }
+
+    .rewards-email-sub-banner__image {
+        width: 115px;
+        height: 72px;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .rewards-email-sub-banner__cta-button,
-    .rewards-email-sub-banner__cta-button::after {
-        transition: none;
+@media (max-width: 480px) {
+    .rewards-email-sub-banner {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .rewards-email-sub-banner__icon {
+        width: 105px;
+        height: 78px;
+    }
+
+    .rewards-email-sub-banner__icon::before {
+        width: 70px;
+        height: 70px;
+    }
+
+    .rewards-email-sub-banner__image {
+        width: 100px;
+        height: 63px;
     }
 }

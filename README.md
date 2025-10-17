@@ -8,25 +8,38 @@ This interactive banner component combines modern web design principles with car
 
 ## Animation Features
 
-### Wiggle Animation System
-The banner's signature feature is a randomized wiggle animation applied to the rewards icon that creates a sense of liveliness and draws attention without being intrusive.
+### Card Jiggle Animation
+The banner's signature feature is a randomized jiggle animation applied to the rewards card that creates a sense of liveliness and draws attention without being intrusive.
 
 **Technical Specifications:**
-- **Duration**: 500ms per wiggle cycle
+- **Duration**: 500ms per jiggle cycle
 - **Timing**: Random intervals between 2-5 seconds
 - **Initial Delay**: 1-4 seconds after page load
-- **Motion Pattern**: 7-step rotation sequence from -4° to +4° with decreasing intensity
+- **Motion Pattern**: 7-step rotation sequence with varying angles
 - **Easing**: `ease-in-out` for natural movement
 - **Accessibility**: Respects `prefers-reduced-motion` settings
 
 **Animation Sequence:**
-1. Rotates -4° (15% keyframe)
-2. Rotates +4° (30% keyframe) 
-3. Rotates -3° (45% keyframe)
-4. Rotates +3° (60% keyframe)
-5. Rotates -1° (75% keyframe)
-6. Rotates +1° (90% keyframe)
-7. Returns to 0° (100% keyframe)
+1. Base rotation: -5° (starting position)
+2. Rotates -9° (15% keyframe)
+3. Rotates -1° (30% keyframe)
+4. Rotates -8° (45% keyframe)
+5. Rotates -2° (60% keyframe)
+6. Rotates -6° (75% keyframe)
+7. Rotates -4° (90% keyframe)
+8. Returns to -5° (100% keyframe)
+
+### Circle Lift Effect
+The pink circular background element features a synchronized pulse animation that creates a lifting effect during the card jiggle.
+
+**Technical Specifications:**
+- **Duration**: 500ms (synchronized with card jiggle)
+- **Scale Range**: 1.0x to 1.12x
+- **Shadow Progression**:
+  - Base: 3px blur, 15% opacity
+  - Peak: 14px vertical offset, 28px blur, 25% opacity
+- **Effect**: Creates depth and emphasis through elevation
+- **Timing**: Coordinated with card animation using CSS `:has()` selector
 
 ### Smart Button Interactions
 The call-to-action button features proximity-based hover detection and animated visual feedback.
